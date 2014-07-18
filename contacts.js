@@ -1,6 +1,8 @@
 //
 // Helper functions
 //
+
+// Helper for sort by Id (default view)
 var compareId = function(a,b) {
 	if (a.id < b.id)
     	return -1;
@@ -9,6 +11,7 @@ var compareId = function(a,b) {
  	return 0;
 }
 
+// Helper for sort by last name
 var compareLastName = function(a,b) {
 	if (a.lname < b.lname)
     	return -1;
@@ -17,6 +20,7 @@ var compareLastName = function(a,b) {
  	return 0;
 }
 
+// Helper for sort by first name
 var compareFirstName = function(a,b) {
 	if (a.fname < b.fname)
     	return -1;
@@ -25,14 +29,17 @@ var compareFirstName = function(a,b) {
  	return 0;
 }
 
+// Helper for incrementing user input id number (primary key)
 var nextInputId = function() {
 	return parseInt(_.max(userInputs, function(userInputs) { return userInputs.id }).id) + 1;
 }
 
+// Helper for incrementing contacts id number (primary key)
 var nextLeadId = function() {
 	return parseInt(_.max(leadsData, function(leadsData) { return leadsData.id }).id) + 1;	
 }
 
+// Helper for displaying label with user defined data fields (ui*)
 var getLabel = function(str) {
 	return _.findWhere(userInputs, {name: str}).label
 }
@@ -251,10 +258,12 @@ $(document).on('ready', function() {
 		}
 	});
 
+	// Sort by last name
 	$(document).on('click', '#leadLastName', function(e) {
 		renderData(leadsData.sort(compareLastName));
 	});
 
+	// Sort by first name
 	$(document).on('click', '#leadFirstName', function(e) {
 		renderData(leadsData.sort(compareFirstName));
 	});
